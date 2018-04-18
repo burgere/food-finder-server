@@ -4,4 +4,4 @@ var config = {
     "YELP_API_VERSION": process.env.YELP_API_VERSION
 }
 
-module.exports - config;
+module.exports = config;
