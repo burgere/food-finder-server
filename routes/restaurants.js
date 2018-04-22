@@ -1,17 +1,22 @@
-'use strict';
+"use strict";
 
-var express = require("express");
-var axios = require("axios");
-var config = require("../config/config.js");
-var util = require("util");
-var router = express.Router();
+const express = require("express");
+const axios = require("axios");
+const config = require("../config/config.js");
+const router = express.Router();
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  let latitude = req.query.latitude, longitude = req.query.longitude;
+  let latitude = req.query.latitude,
+    longitude = req.query.longitude;
 
   let baseUrl =
-    config.YELP_BASE_URL + config.YELP_API_VERSION + "/businesses/search?latitude=" + latitude + "&longitude=" + longitude;
+    config.YELP_BASE_URL +
+    config.YELP_API_VERSION +
+    "/businesses/search?latitude=" +
+    latitude +
+    "&longitude=" +
+    longitude;
 
   axios
     .get(baseUrl, {
@@ -20,11 +25,9 @@ router.get("/", function(req, res, next) {
       }
     })
     .then(response => {
-      res.json(util.inspect(response.data));
+      res.json(response.data);
     })
     .catch(error => {
-      // console.log(error);
-
       throw Error(error);
     });
 });

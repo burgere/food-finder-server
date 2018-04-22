@@ -1,12 +1,12 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const swaggerUi = require('swagger-ui-express');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 var restaurants = require('./routes/restaurants');
 
 var app = express();
@@ -19,8 +19,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/restaurants', restaurants);
+
+//swagger config
+app.use('swagger-ui', swaggerUi.serve);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
