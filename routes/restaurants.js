@@ -1,30 +1,32 @@
-var express = require('express');
-var axios = require('axios');
-var config = require('../config/config.js');
+'use strict';
+
+var express = require("express");
+var axios = require("axios");
+var config = require("../config/config.js");
+var util = require("util");
 var router = express.Router();
 
 /* GET users listing. */
-const baseUrl = config.YELP_BASE_URL + config.YELP_API_VERSION + "/businesses/search"
-router.get('/', function(req, res, next) {
-  console.log(baseUrl);
-  
-  axios.get(baseUrl, {
-    params: {
-      latitude: req.query.latitude,
-      longitude: req.query.longitude
-    },
-    headers: {
-      'Authorization': 'Bearer ' + config.YELP_API_KEY
-    }
-  })
-  .then((response) => {
-    res.json(response);
-  })
-  .catch((error) => {
-    console.log(error);
-    
-    throw Error();
-  })  
+router.get("/", function(req, res, next) {
+  let latitude = req.query.latitude, longitude = req.query.longitude;
+
+  let baseUrl =
+    config.YELP_BASE_URL + config.YELP_API_VERSION + "/businesses/search?latitude=" + latitude + "&longitude=" + longitude;
+
+  axios
+    .get(baseUrl, {
+      headers: {
+        Authorization: "Bearer " + config.YELP_API_KEY
+      }
+    })
+    .then(response => {
+      res.json(util.inspect(response.data));
+    })
+    .catch(error => {
+      // console.log(error);
+
+      throw Error(error);
+    });
 });
 
 module.exports = router;
