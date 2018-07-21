@@ -1,6 +1,8 @@
 # food-finder-server
 Backend Express middleware tier for Food Finder app
 
+NOTE: You will need the Heroku CLI to run the app and configure env variables.
+
 ## To run locally with env variables:
 Install the heroku-config plugin.
 
