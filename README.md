@@ -13,3 +13,7 @@ heroku plugins:install heroku-config
 - Use ```heroku config:pull``` to write the contents of heroku config into a file.
 - Use ```heroku config:push``` to write the contents of a local file into heroku config.
 
+Run the app using ```heroku local```.
+
+You can also specify the port using ```heroku local -p {port number}```.
+
